@@ -17,7 +17,7 @@ set -e
 
 DRYRUN=true
 
-IMAGE_NAME="amazon/amazon-ecs-agent"
+IMAGE_NAME="registry.docker/amazon/amazon-ecs-agent"
 
 AWS_PROFILE=""
 STAGE_S3_BUCKET=""

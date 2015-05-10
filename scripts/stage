@@ -47,7 +47,7 @@ stage_s3() {
 	tarball="$(mktemp)"
 	tarball_md5="$(mktemp)"
 
-	docker save "amazon/amazon-ecs-agent:latest" > "${tarball}"
+	docker save "registry.docker/amazon/amazon-ecs-agent:latest" > "${tarball}"
 	md5sum "${tarball}" | sed 's/ .*//' > "${tarball_md5}"
 	echo "Saved with md5sum $(cat ${tarball_md5})"
 

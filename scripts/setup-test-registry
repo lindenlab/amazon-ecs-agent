@@ -33,7 +33,7 @@ fi
 # This will fail if we already have one running, but that's fine. We'll see it
 # running and push our image to it to make sure it's there
 if [[ "$status" != "true" ]]; then
-	docker run -d --name="$REGISTRY_CONTAINER_NAME" -e SETTINGS_FLAVOR=local -p "127.0.0.1:51670:5000" "${REGISTRY_IMAGE}"
+	docker run -d --name="$REGISTRY_CONTAINER_NAME" -e SETTINGS_FLAVOR=local -p 127.0.0.1:51670:5000 docker.io/registry
 fi
 
 # Wait for it to be started which might include downloading the image
@@ -65,7 +65,7 @@ mirror_local_image() {
 }
 
 for image in "amazon/amazon-ecs-netkitten" "amazon/amazon-ecs-volumes-test" "amazon/squid"; do
-  mirror_local_image "${image}:make" "127.0.0.1:51670/${image}:latest"
+  mirror_local_image "registry.docker/${image}:make" "127.0.0.1:51670/${image}:latest"
 done
 
 BUSYBOX_IMAGE="busybox@sha256:5551dbdfc48d66734d0f01cafee0952cb6e8eeecd1e2492240bf2fd9640c2279"
