@@ -17,7 +17,7 @@
 # Because the Agent's tests include starting docker containers, it is necessary
 # to have both go and docker available in the testing environment.
 # It's easier to get go, so start with docker-in-docker and add go on top
-FROM jpetazzo/dind
+FROM registry.docker/jpetazzo/dind
 MAINTAINER Amazon Web Services, Inc.
 
 # The following code is taken, in part, from the docker-library/golang
