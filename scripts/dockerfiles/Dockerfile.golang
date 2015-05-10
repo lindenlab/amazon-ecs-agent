@@ -14,7 +14,7 @@
 # A Dockerfile for a Go binary with patches applied for CVE-2015-5739,
 # CVE-2015-5740, and CVE-2015-5741.  Uses golang:1.4 as a base for existing
 # environment setup and scripts.
-FROM golang:1.4
+FROM registry.docker/golang:1.4
 MAINTAINER Amazon Web Services, Inc.
 
 # CVE-2015-5739 117ddcb83d7f42d6aa72241240af99ded81118e9

@@ -23,4 +23,4 @@ image: gremlin
 
 clean:
 	rm -f gremlin
-	docker rmi -f "amazon/amazon-ecs-gremlin:make"
+	docker rmi -f "registry.docker/amazon/amazon-ecs-gremlin:make"

@@ -1,0 +1,20 @@
+#ECS_CLUSTER=
+#DOCKER_HOST=
+ECS_RESERVED_PORTS="[22, 80, 443, 2375, 2376, 2377, 51678]"
+#ECS_ENGINE_AUTH_TYPE=docker
+#ECS_ENGINE_AUTH_DATA='{
+#    "registry.docker": {
+#        "username": "myUsername",
+#        "password": "myPassword"
+#    }
+#}'
+#AWS_DEFAULT_REGION=
+#AWS_ACCESS_KEY_ID=
+#AWS_SECRET_ACCESS_KEY=
+#AWS_SESSION_TOKEN
+ECS_LOGLEVEL=info
+ECS_LOGFILE=/var/log/ecs/agent.log
+ECS_CHECKPOINT=true
+ECS_DATADIR=/var/lib/ecs-agent-data
+ECS_UPDATES_ENABLED=false
+ECS_UPDATE_DOWNLOAD_DIR=/var/cache/ecs-agent-updates

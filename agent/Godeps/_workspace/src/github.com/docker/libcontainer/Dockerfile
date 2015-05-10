@@ -1,4 +1,4 @@
-FROM golang:1.4
+FROM registry.docker/golang:1.4
 
 RUN go get golang.org/x/tools/cmd/cover
 
