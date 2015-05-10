@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM registry.docker/debian:latest
 
 RUN apt-get update &&  \
     apt-get install -y ca-certificates && \
