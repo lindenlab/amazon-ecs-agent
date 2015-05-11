@@ -1,0 +1,10 @@
+#!/usr/bin/make -f
+ROOT_DIR := $(shell pwd)
+UID := $(shell id -u)
+GID := $(shell id -g)
+
+%:
+	dh $@ --with-systemd
+
+override_dh_auto_build:
+	make
