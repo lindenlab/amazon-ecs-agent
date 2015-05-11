@@ -11,7 +11,7 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-.PHONY: all gobuild static docker release certs test clean netkitten test-registry gremlin gogenerate
+.PHONY: all gobuild static docker release certs gotest test-in-docker clean netkitten test-registry gremlin gogenerate
 
 all: docker
 
@@ -74,7 +74,11 @@ short-test: gogenerate
 test-registry: netkitten volumes-test
 	@./scripts/setup-test-registry
 
+<<<<<<< HEAD
 test: test-registry gremlin
+=======
+gotest: test-registry
+>>>>>>> Adding initial debian package
 	cd agent && godep go test -timeout=120s -v -cover ./...
 
 test-in-docker:
