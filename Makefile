@@ -74,11 +74,7 @@ short-test: gogenerate
 test-registry: netkitten volumes-test
 	@./scripts/setup-test-registry
 
-<<<<<<< HEAD
-test: test-registry gremlin
-=======
-gotest: test-registry
->>>>>>> Adding initial debian package
+gotest: test-registry gremlin
 	cd agent && godep go test -timeout=120s -v -cover ./...
 
 test-in-docker:
