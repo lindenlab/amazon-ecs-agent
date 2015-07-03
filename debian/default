@@ -17,4 +17,4 @@ ECS_LOGFILE=/var/log/ecs/agent.log
 ECS_CHECKPOINT=true
 ECS_DATADIR=/var/lib/ecs-agent-data
 ECS_UPDATES_ENABLED=false
-ECS_UPDATE_DOWNLOAD_DIR=var/cache/ecs-agent-updates
+ECS_UPDATE_DOWNLOAD_DIR=/var/cache/ecs-agent-updates
