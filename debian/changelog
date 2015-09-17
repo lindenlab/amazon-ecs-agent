@@ -1,0 +1,11 @@
+amazon-ecs-agent (1.2.1-1~linden1) UNRELEASED; urgency=medium
+
+    * Bumping to 1.2.1
+
+ -- Don Kjer <don@lindenlab.com>  Thu, 02 Jul 2015 02:01:46 +0000
+
+amazon-ecs-agent (1.1.0-1~linden1) unstable; urgency=medium
+
+  * Initial release.
+
+ -- Don Kjer <don@lindenlab.com>  Mon, 11 May 2015 18:46:55 +0000

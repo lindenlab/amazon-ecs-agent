@@ -24,7 +24,7 @@ fi
 # This will fail if we already have one running, but that's fine. We'll see it
 # running and push our image to it to make sure it's there
 if [[ "$status" != "true" ]]; then
-	docker run -d --name="$REGISTRY_CONTAINER_NAME" -e SETTINGS_FLAVOR=local -p 127.0.0.1:51670:5000 registry
+	docker run -d --name="$REGISTRY_CONTAINER_NAME" -e SETTINGS_FLAVOR=local -p 127.0.0.1:51670:5000 docker.io/registry
 fi
 
 # Wait for it to be started which might include downloading the image
@@ -47,6 +47,6 @@ sleep 2
 # Make sure our images are pushed to it
 
 for image in "amazon/amazon-ecs-netkitten" "amazon/amazon-ecs-volumes-test"; do
-	docker tag -f "$image:make" "127.0.0.1:51670/$image:latest"
+	docker tag -f "registry.docker/$image:make" "127.0.0.1:51670/$image:latest"
 	docker push "127.0.0.1:51670/$image:latest"
 done

@@ -11,7 +11,7 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-.PHONY: all gobuild static docker release certs test clean netkitten test-registry run-functional-tests gremlin gogenerate
+.PHONY: all gobuild static docker release certs gotest test-in-docker clean netkitten test-registry run-functional-tests gremlin gogenerate
 
 all: docker
 
@@ -29,27 +29,27 @@ static: gogenerate
 # 'build-in-docker' builds the agent within a dockerfile and saves it to the ./out
 # directory
 build-in-docker:
-	@docker build -f scripts/dockerfiles/Dockerfile.build -t "amazon/amazon-ecs-agent-build:make" .
-	@docker run -v "$(shell pwd)/out:/out" -v "$(shell pwd):/go/src/github.com/aws/amazon-ecs-agent" "amazon/amazon-ecs-agent-build:make"
+	@docker build -f scripts/dockerfiles/Dockerfile.build -t "registry.docker/amazon/amazon-ecs-agent-build:make" .
+	@docker run -v "$(shell pwd)/out:/out" -v "$(shell pwd):/go/src/github.com/aws/amazon-ecs-agent" "registry.docker/amazon/amazon-ecs-agent-build:make"
 
 # 'docker' builds the agent dockerfile from the current sourcecode tree, dirty
 # or not
 docker: certs build-in-docker
 	@cd scripts && ./create-amazon-ecs-scratch
-	@docker build -f scripts/dockerfiles/Dockerfile.release -t "amazon/amazon-ecs-agent:make" .
-	@echo "Built Docker image \"amazon/amazon-ecs-agent:make\""
+	@docker build -f scripts/dockerfiles/Dockerfile.release -t "registry.docker/amazon/amazon-ecs-agent:make" .
+	@echo "Built Docker image \"registry.docker/amazon/amazon-ecs-agent:make\""
 
 # 'docker-release' builds the agent from a clean snapshot of the git repo in
 # 'RELEASE' mode
 docker-release:
-	@docker build -f scripts/dockerfiles/Dockerfile.cleanbuild -t "amazon/amazon-ecs-agent-cleanbuild:make" .
-	@docker run -v "$(shell pwd)/out:/out" -v "$(shell pwd):/src/amazon-ecs-agent" "amazon/amazon-ecs-agent-cleanbuild:make"
+	@docker build -f scripts/dockerfiles/Dockerfile.cleanbuild -t "registry.docker/amazon/amazon-ecs-agent-cleanbuild:make" .
+	@docker run -v "$(shell pwd)/out:/out" -v "$(shell pwd):/src/amazon-ecs-agent" "registry.docker/amazon/amazon-ecs-agent-cleanbuild:make"
 
 # Release packages our agent into a "scratch" based dockerfile
 release: certs docker-release
 	@cd scripts && ./create-amazon-ecs-scratch
-	@docker build -f scripts/dockerfiles/Dockerfile.release -t "amazon/amazon-ecs-agent:latest" .
-	@echo "Built Docker image \"amazon/amazon-ecs-agent:latest\""
+	@docker build -f scripts/dockerfiles/Dockerfile.release -t "registry.docker/amazon/amazon-ecs-agent:latest" .
+	@echo "Built Docker image \"registry.docker/amazon/amazon-ecs-agent:latest\""
 
 SDKPATH=agent/Godeps/_workspace/src/github.com/aws/aws-sdk-go
 INFLECTFILE=internal/model/api/inflections.csv
@@ -63,8 +63,8 @@ gogenerate:
 # We need to bundle certificates with our scratch-based container
 certs: misc/certs/ca-certificates.crt
 misc/certs/ca-certificates.crt:
-	docker build -t "amazon/amazon-ecs-agent-cert-source:make" misc/certs/
-	docker run "amazon/amazon-ecs-agent-cert-source:make" cat /etc/ssl/certs/ca-certificates.crt > misc/certs/ca-certificates.crt
+	docker build -t "registry.docker/amazon/amazon-ecs-agent-cert-source:make" misc/certs/
+	docker run "registry.docker/amazon/amazon-ecs-agent-cert-source:make" cat /etc/ssl/certs/ca-certificates.crt > misc/certs/ca-certificates.crt
 
 short-test: gogenerate
 	cd agent && godep go test -short -timeout=25s -v -cover ./...
@@ -74,13 +74,13 @@ short-test: gogenerate
 test-registry: netkitten volumes-test
 	@./scripts/setup-test-registry
 
-test: test-registry gremlin
+gotest: test-registry gremlin
 	cd agent && godep go test -timeout=120s -v -cover ./...
 
 test-in-docker:
-	docker build -f scripts/dockerfiles/Dockerfile.test -t "amazon/amazon-ecs-agent-test:make" .
+	docker build -f scripts/dockerfiles/Dockerfile.test -t "registry.docker/amazon/amazon-ecs-agent-test:make" .
 	# Privileged needed for docker-in-docker so integ tests pass
-	docker run -v "$(shell pwd):/go/src/github.com/aws/amazon-ecs-agent" --privileged "amazon/amazon-ecs-agent-test:make"
+	docker run -v "$(shell pwd):/go/src/github.com/aws/amazon-ecs-agent" --privileged "registry.docker/amazon/amazon-ecs-agent-test:make"
 
 run-functional-tests:
 	cd agent/functional_tests && GOPATH=$(shell pwd)/agent/Godeps/_workspace:${GOPATH} go test -tags functional -timeout=20m -v ./...
@@ -105,6 +105,6 @@ clean:
 	rm -f misc/certs/ca-certificates.crt &> /dev/null
 	rm -f out/amazon-ecs-agent &> /dev/null
 	rm -rf agent/Godeps/_workspace/pkg/
-	cd misc/netkitten; $(MAKE) $(MFLAGS) clean
-	cd misc/volumes-test; $(MAKE) $(MFLAGS) clean
-	cd misc/gremlin; $(MAKE) $(MFLAGS) clean
+	cd misc/netkitten; $(MAKE) $(MFLAGS) clean || true
+	cd misc/volumes-test; $(MAKE) $(MFLAGS) clean || true
+	cd misc/gremlin; $(MAKE) $(MFLAGS) clean || true
