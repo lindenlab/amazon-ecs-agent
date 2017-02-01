@@ -12,8 +12,8 @@
 # express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-if ! docker images | awk '{print $1":"$2}' | grep "amazon/amazon-ecs-netkitten:make" > /dev/null ; then
-	tar -c netkitten | docker import - "amazon/amazon-ecs-netkitten:premake"
-	docker build -q -t "amazon/amazon-ecs-netkitten:make" -f linux.dockerfile .
-	docker rmi "amazon/amazon-ecs-netkitten:premake"
+if ! docker images | awk '{print $1":"$2}' | grep "registry.docker/amazon/amazon-ecs-netkitten:make" > /dev/null ; then
+	tar -c netkitten | docker import - "registry.docker/amazon/amazon-ecs-netkitten:premake"
+	docker build -q -t "registry.docker/amazon/amazon-ecs-netkitten:make" -f linux.dockerfile .
+	docker rmi "registry.docker/amazon/amazon-ecs-netkitten:premake"
 fi

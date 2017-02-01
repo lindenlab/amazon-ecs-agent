@@ -15,7 +15,7 @@
 all: netkitten image
 
 netkitten:
-	docker run -v $(shell pwd):/out -v $(shell pwd)/netkitten.go:/in/netkitten.go -e CGO_ENABLED=0 golang:1.7 go build -a -installsuffix cgo -ldflags '-s' -o /out/netkitten /in/netkitten.go
+	docker run -v $(shell pwd):/out -v $(shell pwd)/netkitten.go:/in/netkitten.go -e CGO_ENABLED=0 registry.docker/golang:1.7 go build -a -installsuffix cgo -ldflags '-s' -o /out/netkitten /in/netkitten.go
 
 image: netkitten
 	@./docker-image
@@ -23,4 +23,4 @@ image: netkitten
 
 clean:
 	rm -f netkitten
-	-docker rmi "amazon/amazon-ecs-netkitten:make"
+	-docker rmi "registry.docker/amazon/amazon-ecs-netkitten:make"

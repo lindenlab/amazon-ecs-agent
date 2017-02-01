@@ -35,7 +35,7 @@ const (
 	// checkPointSleep is the sleep duration in milliseconds between
 	// starting/stopping containers in the test code.
 	checkPointSleep = 5 * SleepBetweenUsageDataCollection
-	testImageName   = "amazon/amazon-ecs-gremlin:make"
+	testImageName   = "registry.docker/amazon/amazon-ecs-gremlin:make"
 
 	// defaultDockerTimeoutSeconds is the timeout for dialing the docker remote API.
 	defaultDockerTimeoutSeconds uint = 10

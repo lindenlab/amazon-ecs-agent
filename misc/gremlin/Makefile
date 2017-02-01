@@ -15,7 +15,7 @@
 all: gremlin image
 
 gremlin: gremlin.go
-	docker run -v $(shell pwd):/out -v $(shell pwd)/gremlin.go:/in/gremlin.go -e CGO_ENABLED=0 golang:1.7 go build -a -x -ldflags '-s' -o /out/gremlin /in/gremlin.go
+	docker run -v $(shell pwd):/out -v $(shell pwd)/gremlin.go:/in/gremlin.go -e CGO_ENABLED=0 registry.docker/golang:1.7 go build -a -x -ldflags '-s' -o /out/gremlin /in/gremlin.go
 
 image: gremlin
 	@./docker-image
@@ -23,4 +23,4 @@ image: gremlin
 
 clean:
 	rm -f gremlin
-	-docker rmi -f "amazon/amazon-ecs-gremlin:make"
+	-docker rmi -f "registry.docker/amazon/amazon-ecs-gremlin:make"

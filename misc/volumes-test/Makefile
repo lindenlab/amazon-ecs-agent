@@ -19,4 +19,4 @@ image:
 
 
 clean:
-	-docker rmi "amazon/amazon-ecs-volumes-test:make"
+	-docker rmi "registry.docker/amazon/amazon-ecs-volumes-test:make"

@@ -15,7 +15,7 @@
 all: image
 
 image:
-	docker build -f Dockerfile -t "amazon/testnnp:make" .
+	docker build -f Dockerfile -t "registry.docker/amazon/testnnp:make" .
 
 clean:
-	-docker rmi "amazon/testnnp:make"
+	-docker rmi "registry.docker/amazon/testnnp:make"

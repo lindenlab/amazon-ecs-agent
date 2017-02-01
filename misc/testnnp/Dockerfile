@@ -11,7 +11,7 @@
 # express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-FROM gcc:4.9
+FROM docker.io/gcc:4.9
 COPY . /usr/src/
 WORKDIR /usr/src/
 RUN gcc -o testnnp testnnp.c

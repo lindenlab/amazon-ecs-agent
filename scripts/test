@@ -20,4 +20,4 @@ sleep 2
 make get-deps
 cd agent
 cd ..
-make test
+make gotest

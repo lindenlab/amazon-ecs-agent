@@ -54,7 +54,7 @@ tag_and_push_docker() {
 	fi
 	for tag in ${IMAGE_TAG_VERSION} ${IMAGE_TAG_SHA} ${IMAGE_TAG_LATEST}; do
 		echo "Tagging as ${IMAGE_NAME}:${tag}"
-		docker tag amazon/amazon-ecs-agent:latest "${IMAGE_NAME}:${tag}"
+		docker tag registry.docker/amazon/amazon-ecs-agent:latest "${IMAGE_NAME}:${tag}"
 		echo "Pushing ${IMAGE_NAME}:${tag}"
 		dryval docker push "${IMAGE_NAME}:${tag}"
 	done

@@ -19,7 +19,7 @@ import "github.com/aws/amazon-ecs-agent/agent/api"
 
 const (
 	dockerEndpoint  = "npipe:////./pipe/docker_engine"
-	testVolumeImage = "amazon/amazon-ecs-volumes-test:make"
+	testVolumeImage = "registry.docker/amazon/amazon-ecs-volumes-test:make"
 )
 
 // TODO implement this

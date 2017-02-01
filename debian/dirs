@@ -1,0 +1,3 @@
+var/log/ecs
+var/lib/ecs-agent-data
+var/cache/ecs-agent-updates

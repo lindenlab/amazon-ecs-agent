@@ -12,8 +12,8 @@
 # express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-if ! docker images | awk '{print $1":"$2}' | grep "amazon/amazon-ecs-gremlin:make" > /dev/null ; then
-	tar -c gremlin | docker import - "amazon/amazon-ecs-gremlin:premake"
-	docker build -t "amazon/amazon-ecs-gremlin:make" .
-	docker rmi "amazon/amazon-ecs-gremlin:premake"
+if ! docker images | awk '{print $1":"$2}' | grep "registry.docker/amazon/amazon-ecs-gremlin:make" > /dev/null ; then
+	tar -c gremlin | docker import - "registry.docker/amazon/amazon-ecs-gremlin:premake"
+	docker build -t "registry.docker/amazon/amazon-ecs-gremlin:make" .
+	docker rmi "registry.docker/amazon/amazon-ecs-gremlin:premake"
 fi

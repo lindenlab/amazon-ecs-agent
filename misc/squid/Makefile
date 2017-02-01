@@ -1,5 +1,5 @@
 
 .PHONY: all
 all:
-	docker build -t amazon/squid:make .
+	docker build -t registry.docker/amazon/squid:make .
 

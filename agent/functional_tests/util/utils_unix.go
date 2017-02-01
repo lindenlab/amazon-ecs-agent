@@ -81,7 +81,7 @@ func init() {
 // 'make'
 func RunAgent(t *testing.T, options *AgentOptions) *TestAgent {
 	agent := &TestAgent{t: t}
-	agentImage := "amazon/amazon-ecs-agent:make"
+	agentImage := "registry.docker/amazon/amazon-ecs-agent:make"
 	if envImage := os.Getenv("ECS_AGENT_IMAGE"); envImage != "" {
 		agentImage = envImage
 	}

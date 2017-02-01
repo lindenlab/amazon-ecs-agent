@@ -13,4 +13,4 @@
 
 
 # TODO be smart about this and only rebuild if necessary
-docker build -t "amazon/amazon-ecs-volumes-test:make" -f "${PSScriptRoot}/windows.dockerfile" ${PSScriptRoot}
+docker build -t "registry.docker/amazon/amazon-ecs-volumes-test:make" -f "${PSScriptRoot}/windows.dockerfile" ${PSScriptRoot}

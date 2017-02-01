@@ -23,4 +23,4 @@ docker run `
   golang:1.7-windowsservercore `
   powershell ${buildscript}
 
-docker build -t "amazon/amazon-ecs-netkitten:make" -f "${PSScriptRoot}/windows.dockerfile" ${PSScriptRoot}
+docker build -t "registry.docker/amazon/amazon-ecs-netkitten:make" -f "${PSScriptRoot}/windows.dockerfile" ${PSScriptRoot}

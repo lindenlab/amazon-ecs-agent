@@ -1,0 +1,14 @@
+[Install]
+WantedBy=multi-user.target
+
+[Unit]
+Description=Amazon EC2 Container Service Agent
+Documentation=https://github.com/aws/amazon-ecs-agent
+After=consul.target
+Requires=consul.target
+
+[Service]
+EnvironmentFile=/etc/default/amazon-ecs-agent
+ExecStart=/usr/bin/amazon-ecs-agent
+Restart=always
+RestartSec=60

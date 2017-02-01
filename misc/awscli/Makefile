@@ -1,3 +1,3 @@
 .PHONY: all
 all:
-	docker build -t amazon/awscli:make .
+	docker build -t registry.docker/amazon/awscli:make .
